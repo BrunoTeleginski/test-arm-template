@@ -34,6 +34,9 @@ $armOutputObj.PSObject.Properties | ForEach-Object {
     }
 
     $var = "##vso[$attribString]$value"
-    
+ 
+    ECHO $keyname
+    ECHO $value
+   
     Write-Output -InputObject $var
 }
