@@ -36,7 +36,9 @@
     }
   ],
   "outputs": {
-    "virtualNetworkResourceId": "[subscriptionResourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]"
+    "virtualNetworkResourceId": {
+      "value": "[subscriptionResourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]"
+    }
   }
 }
 
