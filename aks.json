@@ -17,7 +17,6 @@
             "apiVersion": "2020-02-01",
             "location": "[resourceGroup().location]",
             "properties": {
-                "kubernetesVersion": "1.15.7",
                 "dnsPrefix": "dnsprefix",
                 "agentPoolProfiles": [
                     {
