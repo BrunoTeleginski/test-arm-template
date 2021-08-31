@@ -16,6 +16,9 @@
             "type": "Microsoft.ContainerService/managedClusters",
             "apiVersion": "2020-02-01",
             "location": "[resourceGroup().location]",
+            "identity": {
+                "type": "SystemAssigned"
+            },
             "properties": {
                 "dnsPrefix": "dnsprefix",
                 "agentPoolProfiles": [
