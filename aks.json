@@ -1,0 +1,88 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetwork": {
+            "type": "String"
+        }
+    },
+    "functions": [],
+    "variables": {
+        "aksName":"akscluster1"
+    },
+    "resources": [
+        {
+            "name": "aksCluster1",
+            "type": "Microsoft.ContainerService/managedClusters",
+            "apiVersion": "2020-02-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "kubernetesVersion": "1.15.7",
+                "dnsPrefix": "dnsprefix",
+                "agentPoolProfiles": [
+                    {
+                        "name": "agentpool",
+                        "count": 1,
+                        "vmSize": "Standard_DS2_v2",
+                        "osDiskSizeGB": 128,
+                        "osDiskType": "Managed",
+                        "kubeletDiskType": "OS",
+                        "vnetSubnetID": "[concat(parameters('virtualNetwork'), '/subnets/default')]",
+                        "maxPods": 110,
+                        "type": "VirtualMachineScaleSets",
+                        "availabilityZones": [
+                            "1"
+                        ],
+                        "enableAutoScaling": false,
+                        "orchestratorVersion": "1.20.7",
+                        "nodeLabels": {},
+                        "mode": "System",
+                        "osType": "Linux",
+                        "osSKU": "Ubuntu",
+                        "enableFIPS": false
+                    }
+                ],
+                "servicePrincipalProfile": {
+                    "clientId": "msi"
+                },
+                "addonProfiles": {
+                    "azurepolicy": {
+                        "enabled": true
+                    },
+                    "httpApplicationRouting": {
+                        "enabled": true
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.ContainerService/managedClusters/agentPools",
+            "apiVersion": "2021-05-01",
+            "name": "[concat(variables('aksName'), '/agentpool')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.ContainerService/managedClusters', variables('aksName'))]"
+            ],
+            "properties": {
+                "count": 1,
+                "vmSize": "Standard_DS2_v2",
+                "osDiskSizeGB": 128,
+                "osDiskType": "Managed",
+                "kubeletDiskType": "OS",
+                "vnetSubnetID": "[concat(parameters('virtualNetwork'), '/subnets/default')]",
+                "maxPods": 110,
+                "type": "VirtualMachineScaleSets",
+                "availabilityZones": [
+                    "1"
+                ],
+                "enableAutoScaling": false,
+                "orchestratorVersion": "1.20.7",
+                "nodeLabels": {},
+                "mode": "System",
+                "osType": "Linux",
+                "osSKU": "Ubuntu",
+                "enableFIPS": false
+            }
+        }
+    ],
+    "outputs": {}
+}
