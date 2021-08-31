@@ -37,15 +37,7 @@
   ],
   "outputs": {
     "virtualNetworkResourceId": {
-      "value": "[subscriptionResourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]",
-      "type": "string"	
-    },
-    "virtualNetworkResourceId2": {
-      "value": "[subscriptionResourceId('Microsoft.Network/virtualNetworks/subnets',variables('vnetName'))]",
-      "type": "string"	
-    },
-    "virtualNetworkResourceId3": {
-      "value": "[tenantResourceId('Microsoft.Network/virtualNetworks',variables('vnetName'))]",
+      "value": "[resourceId('Microsoft.Network/virtualNetworks', variables('vnetName'))]",
       "type": "string"	
     }
   }
