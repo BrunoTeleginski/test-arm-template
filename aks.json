@@ -51,6 +51,19 @@
                     "httpApplicationRouting": {
                         "enabled": true
                     }
+                },
+                "networkProfile": {
+                    "networkPlugin": "azure",
+                    "loadBalancerSku": "Standard",
+                    "loadBalancerProfile": {
+                        "managedOutboundIPs": {
+                            "count": 1
+                        }
+                    },
+                    "serviceCidr": "10.0.0.0/16",
+                    "dnsServiceIP": "10.0.0.10",
+                    "dockerBridgeCidr": "172.17.0.1/16",
+                    "outboundType": "loadBalancer"
                 }
             }
         },
