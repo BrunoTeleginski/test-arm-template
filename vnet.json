@@ -7,7 +7,7 @@
     "vnetName": "VNet1",
     "vnetAddressPrefix": "10.0.0.0/16",
     "subnet1Prefix": "10.0.0.0/24",
-    "subnet1Name": "Subnet1",
+    "subnet1Name": "default",
     "location": "[resourceGroup().location]"
   },
   "functions": [],
